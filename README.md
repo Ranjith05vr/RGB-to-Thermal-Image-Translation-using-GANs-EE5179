@@ -1,16 +1,60 @@
 # RGB-to-Thermal Image Translation using GANs
 
-Deep learning project for the **RGB-to-Thermal Transfer** Kaggle competition, focused on generating thermal images from corresponding RGB images using **Generative Adversarial Networks (GANs)**.
+Deep learning project developed for the **RGB-to-Thermal Transfer Kaggle Competition**, focused on generating thermal images from RGB images using image-to-image translation models.
 
-The project investigates multiple image-to-image translation architectures and compares their ability to learn the mapping from visible-spectrum RGB images to thermal images.
+## Competition
 
-Our best-performing approach was a **Pix2Pix Conditional GAN (cGAN)**, which achieved a **PSNR of 26.05** and a **12th-place leaderboard position**.
-
----
+**Kaggle Competition:** [RGB-to-Thermal Transfer](https://www.kaggle.com/competitions/rgb_2_thermal)
 
 ## Project Overview
 
-Thermal cameras provide information that is not directly available in conventional RGB images, particularly under challenging illumination conditions. The objective of this project was to investigate whether a deep generative model could learn the transformation:
+Thermal cameras provide information that is fundamentally different from conventional RGB cameras and can be useful in applications such as surveillance, autonomous systems, low-light imaging, and object detection.
+
+This project investigates whether thermal images can be generated from corresponding RGB images using **Generative Adversarial Networks (GANs)** and encoder-decoder architectures.
+
+Multiple image-to-image translation architectures were implemented and evaluated:
+
+- **Pix2Pix**
+- **CycleGAN**
+- **ResNet-based U-Net / U-Net++**
+- **Dual-Attention GAN (DAGAN)**
+
+Different loss functions, data augmentation strategies, and training hyperparameters were explored to improve the quality of the generated thermal images.
+
+The best-performing approach was **Pix2Pix Conditional GAN (cGAN)**.
+
+---
+
+## Approach
+
+The overall workflow was:
 
 ```text
-RGB Image  →  Thermal Image
+RGB Images
+    │
+    ▼
+Data Preprocessing
+    │
+    ├── Image Normalization
+    ├── Random Cropping
+    └── Horizontal / Vertical Flipping
+    │
+    ▼
+RGB → Thermal Image Translation
+    │
+    ├── Pix2Pix
+    ├── CycleGAN
+    ├── ResNet U-Net / U-Net++
+    └── DAGAN
+    │
+    ▼
+Loss Optimization
+    │
+    ▼
+Generated Thermal Image
+    │
+    ▼
+PSNR Evaluation
+    │
+    ▼
+Kaggle Submission
